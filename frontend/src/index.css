@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-obsidian-950: #0f0f0f;
+  --color-obsidian-900: #1a1a1a;
+  --color-obsidian-800: #333333;
+  --color-obsidian-700: #e0e0e0;
+  --color-obsidian-600: #999999;
+  --color-success: #2d5016;
+  --color-error: #8B3A3A;
+  --color-warning: #5c4033;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-obsidian-950);
+  color: var(--color-obsidian-700);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+button {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+  padding: 8px 12px;
+  transition: background-color 0.2s;
+}
+
+input, select, textarea {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  background-color: var(--color-obsidian-900);
+  color: var(--color-obsidian-700);
+  border: 1px solid var(--color-obsidian-800);
+  border-radius: 2px;
+  padding: 8px 12px;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-success);
+}
+
+.monospace {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 12px;
+}
+
+.btn-success {
+  background-color: var(--color-success);
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #1e3810;
+}
+
+.btn-error {
+  background-color: var(--color-error);
+  color: white;
+}
+
+.btn-error:hover {
+  background-color: #6B2A2A;
+}
+
+.card {
+  background-color: var(--color-obsidian-900);
+  border: 0.5px solid var(--color-obsidian-800);
+  border-radius: 2px;
+  padding: 16px;
+}
+
+.card:hover {
+  background-color: #252525;
+}
