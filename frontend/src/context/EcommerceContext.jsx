@@ -48,6 +48,10 @@ export function EcommerceProvider({ children }) {
   const [catalogo, setCatalogo] = useState([]);
   const [carrinho, setCarrinho] = useState([]);
   const [excecoes, setExcecoes] = useState([]);
+  const [showCart, setShowCart] = useState(false);
+  const [showModalCadastro, setShowModalCadastro] = useState(false);
+  const [toasts, setToasts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const stored = carregarStorage();
@@ -66,14 +70,18 @@ export function EcommerceProvider({ children }) {
     }
   }, [catalogo, carrinho]);
 
-  const adicionarExcecao = (tipo, mensagem) => {
-    const excecao = {
-      id: generateUUID(),
-      tipo,
-      mensagem,
-      timestamp: new Date().toLocaleTimeString('pt-BR')
-    };
-    setExcecoes(prev => [...prev, excecao]);
+  const addToast = (type, message) => {
+    const id = generateUUID();
+    const toast = { id, type, message };
+    setToasts(prev => [...prev, toast]);
+
+    setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id));
+    }, 3000);
+  };
+
+  const removeToast = (id) => {
+    setToasts(prev => prev.filter(t => t.id !== id));
   };
 
   const cadastrarLivro = (livro) => {
@@ -95,12 +103,13 @@ export function EcommerceProvider({ children }) {
       }
 
       setCatalogo(prev => [...prev, livro]);
-      adicionarExcecao('Sucesso', `Livro ID ${livro.id} cadastrado (${livro.titulo})`);
+      addToast('success', `Livro ID ${livro.id} cadastrado (${livro.titulo})`);
+      setShowModalCadastro(false);
     } catch (e) {
       if (e instanceof DadosInvalidosException) {
-        adicionarExcecao(e.name, e.message);
+        addToast('error', e.message);
       } else {
-        adicionarExcecao('Erro', e.message);
+        addToast('error', e.message);
       }
       throw e;
     }
@@ -140,12 +149,12 @@ export function EcommerceProvider({ children }) {
         }
       });
 
-      adicionarExcecao('Sucesso', `${livro.titulo} x${quantidade} adicionado ao carrinho`);
+      addToast('success', `${livro.titulo} adicionado ao carrinho`);
     } catch (e) {
       if (e instanceof DadosInvalidosException || e instanceof EstoqueInsuficienteException) {
-        adicionarExcecao(e.name, e.message);
+        addToast('error', e.message);
       } else {
-        adicionarExcecao('Erro', e.message);
+        addToast('error', e.message);
       }
       throw e;
     }
@@ -193,9 +202,10 @@ export function EcommerceProvider({ children }) {
 
         setCatalogo(novosCatalogo);
         setCarrinho([]);
+        setShowCart(false);
 
-        const msg = `COMPRA FINALIZADA | Total: R$ ${(total + desconto).toFixed(2)} | Desconto: R$ ${desconto.toFixed(2)} | A Pagar: R$ ${total.toFixed(2)}`;
-        adicionarExcecao('Sucesso', msg);
+        const msg = `COMPRA FINALIZADA! Total: R$ ${(total + desconto).toFixed(2)} | Desconto: R$ ${desconto.toFixed(2)} | A Pagar: R$ ${total.toFixed(2)}`;
+        addToast('success', msg);
       } catch (e) {
         if (e instanceof EstoqueInsuficienteException) {
           throw e;
@@ -206,29 +216,31 @@ export function EcommerceProvider({ children }) {
       if (e instanceof CarrinhoInvalidoException ||
           e instanceof CupomInvalidoException ||
           e instanceof EstoqueInsuficienteException) {
-        adicionarExcecao(e.name, e.message);
+        addToast('error', e.message);
       } else {
-        adicionarExcecao('Erro', e.message);
+        addToast('error', e.message);
       }
       throw e;
     }
   };
 
-  const limparExcecoes = () => {
-    setExcecoes([]);
-  };
-
   const value = {
     catalogo,
     carrinho,
-    excecoes,
+    toasts,
+    showCart,
+    showModalCadastro,
+    searchQuery,
     cadastrarLivro,
     buscarLivroPorId,
     adicionarAoCarrinho,
     removerDoCarrinho,
     finalizarCompra,
-    limparExcecoes,
-    adicionarExcecao
+    addToast,
+    removeToast,
+    setShowCart,
+    setShowModalCadastro,
+    setSearchQuery
   };
 
   return (
