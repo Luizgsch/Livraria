@@ -3,14 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --color-obsidian-950: #0f0f0f;
-  --color-obsidian-900: #1a1a1a;
-  --color-obsidian-800: #333333;
-  --color-obsidian-700: #e0e0e0;
-  --color-obsidian-600: #999999;
-  --color-success: #2d5016;
-  --color-error: #8B3A3A;
-  --color-warning: #5c4033;
+  --color-white: #ffffff;
+  --color-beige-50: #f5f1ed;
+  --color-beige-100: #ebe4dd;
+  --color-beige-200: #d9ccc0;
+  --color-brown-light: #8b6f47;
+  --color-brown-base: #6b4423;
+  --color-brown-dark: #4a2c1a;
+  --color-success: #2d6a4f;
+  --color-error: #c1121f;
+  --color-warning: #fca311;
 }
 
 * {
@@ -24,69 +26,188 @@ html, body, #root {
 }
 
 body {
-  background-color: var(--color-obsidian-950);
-  color: var(--color-obsidian-700);
+  background-color: var(--color-white);
+  color: var(--color-brown-dark);
   font-family: system-ui, -apple-system, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Merriweather, Georgia, serif;
+  color: var(--color-brown-dark);
+  margin: 0;
+}
+
+h1 {
+  font-size: 48px;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 1.3;
 }
 
 button {
   font-family: system-ui, -apple-system, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   border: none;
-  border-radius: 2px;
-  padding: 8px 12px;
-  transition: background-color 0.2s;
+  border-radius: 4px;
+  padding: 10px 20px;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+
+button.btn-primary {
+  background-color: var(--color-brown-base);
+  color: white;
+}
+
+button.btn-primary:hover {
+  background-color: var(--color-brown-dark);
+}
+
+button.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button.btn-secondary {
+  background-color: var(--color-beige-50);
+  color: var(--color-brown-base);
+  border: 1px solid var(--color-brown-base);
+}
+
+button.btn-secondary:hover {
+  background-color: var(--color-beige-100);
 }
 
 input, select, textarea {
   font-family: system-ui, -apple-system, sans-serif;
-  font-size: 14px;
-  background-color: var(--color-obsidian-900);
-  color: var(--color-obsidian-700);
-  border: 1px solid var(--color-obsidian-800);
-  border-radius: 2px;
-  padding: 8px 12px;
+  font-size: 16px;
+  background-color: white;
+  color: var(--color-brown-dark);
+  border: 1px solid var(--color-beige-200);
+  border-radius: 4px;
+  padding: 10px 12px;
   transition: border-color 0.2s;
 }
 
 input:focus, select:focus, textarea:focus {
   outline: none;
-  border-color: var(--color-success);
+  border-color: var(--color-brown-base);
+  box-shadow: 0 0 0 3px rgba(107, 68, 35, 0.1);
 }
 
-.monospace {
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-  font-size: 12px;
+.card {
+  background-color: white;
+  border: 1px solid var(--color-beige-200);
+  border-radius: 6px;
+  padding: 16px;
+  transition: all 0.3s;
 }
 
-.btn-success {
+.card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.toast {
+  position: fixed;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+}
+
+.toast.success {
   background-color: var(--color-success);
   color: white;
 }
 
-.btn-success:hover {
-  background-color: #1e3810;
-}
-
-.btn-error {
+.toast.error {
   background-color: var(--color-error);
   color: white;
 }
 
-.btn-error:hover {
-  background-color: #6B2A2A;
+.toast.warning {
+  background-color: var(--color-warning);
+  color: white;
 }
 
-.card {
-  background-color: var(--color-obsidian-900);
-  border: 0.5px solid var(--color-obsidian-800);
-  border-radius: 2px;
-  padding: 16px;
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.card:hover {
-  background-color: #252525;
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  animation: fadeIn 0.2s;
+}
+
+.drawer {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  background-color: white;
+  z-index: 50;
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 6px;
+  padding: 32px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: fadeIn 0.3s;
 }
