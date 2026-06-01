@@ -68,6 +68,10 @@ public:
         // Acesso aos atributos da classe base através dos getters públicos
         return getPrecoBase() + (peso * 0.05);
     }
+
+    virtual std::string getDescricaoTipo() const override {
+        return "Livro Impresso";
+    }
 };
 
 // ============================================================================
@@ -144,6 +148,10 @@ public:
         // "override" garante que este método sobrescreve o da classe base
         // Acesso aos atributos da classe base através dos getters públicos
         return getPrecoBase() * 0.85;
+    }
+
+    virtual std::string getDescricaoTipo() const override {
+        return "E-book";
     }
 };
 

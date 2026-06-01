@@ -57,14 +57,15 @@ export function ProductModal() {
 
   return (
     <>
-      {/* Overlay */}
+      {/* Overlay Background */}
       <div
-        className="modal-overlay"
+        className="fixed inset-0 bg-black/50 z-40"
         onClick={() => setShowModalCadastro(false)}
       />
 
       {/* Modal */}
-      <div className="modal w-full md:w-96">
+      <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="modal w-full md:w-96 mx-4">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-brown-dark">Adicionar Livro</h2>
@@ -202,6 +203,7 @@ export function ProductModal() {
             </button>
           </div>
         </form>
+        </div>
       </div>
     </>
   );

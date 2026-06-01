@@ -20,12 +20,12 @@ void exibirMenu() {
     cout << "╔════════════════════════════════════════╗\n";
     cout << "║       LIVRARIA POO - MENU PRINCIPAL    ║\n";
     cout << "╠════════════════════════════════════════╣\n";
-    cout << "║ [1] Listar Catálogo                   ║\n";
-    cout << "║ [2] Adicionar Livro ao Carrinho       ║\n";
-    cout << "║ [3] Ver Carrinho                      ║\n";
-    cout << "║ [4] Finalizar Compra                  ║\n";
-    cout << "║ [5] Cadastrar Novo Livro              ║\n";
-    cout << "║ [6] Sair                              ║\n";
+    cout << "║ [1] Listar Catálogo                    ║\n";
+    cout << "║ [2] Adicionar Livro ao Carrinho        ║\n";
+    cout << "║ [3] Ver Carrinho                       ║\n";
+    cout << "║ [4] Finalizar Compra                   ║\n";
+    cout << "║ [5] Cadastrar Novo Livro               ║\n";
+    cout << "║ [6] Sair                               ║\n";
     cout << "╚════════════════════════════════════════╝\n";
     cout << "Escolha uma opção: ";
 }
@@ -84,7 +84,7 @@ void verCarrinho(Carrinho& carrinho) {
         }
 
         cout << "╔════════════════════════════════════════╗\n";
-        cout << "║          ITENS NO CARRINHO            ║\n";
+        cout << "║          ITENS NO CARRINHO             ║\n";
         cout << "╠════════════════════════════════════════╣\n";
 
         double totalCarrinho = 0.0;
@@ -104,7 +104,7 @@ void verCarrinho(Carrinho& carrinho) {
             totalCarrinho += subtotal;
         }
 
-        cout << "\n" << string(40, '─') << "\n";
+        cout << "\n" << string(40, '-') << "\n";
         cout << "TOTAL: R$ " << fixed << setprecision(2) << totalCarrinho << "\n";
         cout << "╚════════════════════════════════════════╝\n";
 
@@ -238,7 +238,7 @@ void cadastrarNovoLivro(Ecommerce& ecommerce) {
                 throw TamanhoInvalidoException("Tamanho inválido.");
             }
 
-            novoLivro = new Ebook(id, titulo, autor, preco, quantidade, formato, tamanhoMB);
+            novoLivro = new Ebook(id, titulo, autor, preco, quantidade, tamanhoMB, formato);
         }
 
         ecommerce.cadastrarLivro(novoLivro);
@@ -303,8 +303,8 @@ int main() {
             "Thomas H. Cormen",
             45.00,
             100,
-            "PDF",
-            15.5
+            15.5,
+            "PDF"
         );
         ecommerce.cadastrarLivro(livro3);
 
@@ -321,8 +321,8 @@ int main() {
     bool sair = false;
 
     cout << "\n╔════════════════════════════════════════╗\n";
-    cout << "║  BEM-VINDO À LIVRARIA POO!            ║\n";
-    cout << "║  Sistema de E-commerce para Livros    ║\n";
+    cout << "║  BEM-VINDO À LIVRARIA POO!             ║\n";
+    cout << "║  Sistema de E-commerce para Livros     ║\n";
     cout << "╚════════════════════════════════════════╝\n";
 
     while (!sair) {
@@ -358,8 +358,8 @@ int main() {
 
             case 6:
                 cout << "\n╔════════════════════════════════════════╗\n";
-                cout << "║     OBRIGADO POR USAR NOSSA LIVRARIA!   ║\n";
-                cout << "║          Até a próxima compra!          ║\n";
+                cout << "║     OBRIGADO POR USAR NOSSA LIVRARIA!  ║\n";
+                cout << "║          Até a próxima compra!         ║\n";
                 cout << "╚════════════════════════════════════════╝\n\n";
                 sair = true;
                 break;

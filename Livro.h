@@ -101,11 +101,14 @@ public:
         this->qtdEstoque -= quantidade;
     }
 
-    // ===== MÉTODO VIRTUAL PURO (Polimorfismo) =====
+    // ===== MÉTODOS VIRTUAIS (Polimorfismo) =====
 
     // Calcula o preço final do livro de forma específica para cada tipo
     // Será implementado por LivroImpresso e LivroDigital
     virtual double calcularPrecoFinal() const = 0;
+
+    // Retorna descrição do tipo de livro (Impresso ou E-book)
+    virtual std::string getDescricaoTipo() const = 0;
 };
 
 #endif // LIVRO_H

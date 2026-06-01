@@ -3,7 +3,7 @@ import { useEcommerce } from '../hooks/useEcommerce.js';
 import { SearchBar } from './SearchBar.jsx';
 
 export function Header() {
-  const { carrinho, setShowCart, showCart } = useEcommerce();
+  const { carrinho, setShowCart, showCart, setShowModalCadastro } = useEcommerce();
 
   const cartCount = carrinho.length;
 
@@ -18,6 +18,16 @@ export function Header() {
 
         {/* Search Bar */}
         <SearchBar />
+
+        {/* Add Book Button */}
+        <button
+          onClick={() => setShowModalCadastro(true)}
+          className="flex items-center gap-2 px-4 py-2 rounded-md bg-brown-base text-white hover:bg-brown-dark transition-colors"
+          title="Adicionar novo livro"
+        >
+          <span className="text-lg">➕</span>
+          <span className="hidden sm:inline">Livro</span>
+        </button>
 
         {/* Cart Icon */}
         <button
