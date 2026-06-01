@@ -148,7 +148,7 @@ input:focus, select:focus, textarea:focus {
 
 @keyframes slideIn {
   from {
-    transform: translateX(400px);
+    transform: translateX(100%);
     opacity: 0;
   }
   to {
